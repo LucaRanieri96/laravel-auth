@@ -20,7 +20,7 @@ class ProjectSeeder extends Seeder
     for ($i = 0; $i < 10; $i++) {
       $project = new Project();
       $project->name = $faker->sentence();
-      $project->slug = Str::slug($project->title, '-');
+      $project->slug = Project::generateSlug($project->title, '-');
       $project->repoUrl = Project::generateRepoUrl($project->slug);
       $project->startingDate = date("Y-m-d") . " " . date("H:i:s");
       $project->save();

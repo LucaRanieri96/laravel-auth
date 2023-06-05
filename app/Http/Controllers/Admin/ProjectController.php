@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
@@ -15,7 +16,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::orderByDesc("id")->get();
+        return view("admin.projects.index", compact("projects"));
     }
 
     /**
@@ -25,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.projects.create");
     }
 
     /**
@@ -36,7 +38,13 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $valData =  $request->validated();
+
+        $valData["slug"] = Project::generateSlug($valData["name"]);
+        $valData["repoUrl"] = Project::generateRepoUrl($valData["slug"]);
+        $valData["startingDate"] = date("Y-m-d") . " " . date("H:i:s");
+        Project::create($valData);
+        return to_route("admin.projects.index")->with("message", "Project successfully inserted");
     }
 
     /**
