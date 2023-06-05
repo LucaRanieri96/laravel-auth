@@ -27,19 +27,7 @@
         <td scope="row">{{ $project->name }}</td>
         <td scope="row">{{ $project->repoUrl }}</td>
         <td scope="row">{{ $project->startingDate }}</td>
-        <td scope="row">
-          <a class="text-decoration-none btn btn-success text-dark" href="{{ route('admin.projects.show', $project->id) }}">
-            <i class="fa-regular fa-eye fa-fw"></i>
-          </a>
-          <a class="text-decoration-none btn btn-warning text-dark my-2" href="{{ route('admin.projects.edit', $project->id) }}">
-            <i class="fa-regular fa-pen-to-square fa-fw"></i>
-          </a>
-          <a class="text-decoration-none btn btn-danger text-dark" href="#">
-            <i class="fa-regular fa-trash-can fa-fw"></i>
-          </a>
-        </td>
       </tr>
-      @include("partials.deletionModal")
       @empty
       <tr>
         <td scope="row">No projects found</td>

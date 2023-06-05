@@ -42,6 +42,7 @@ class ProjectController extends Controller
 
         $valData["slug"] = Project::generateSlug($valData["name"]);
         $valData["repoUrl"] = Project::generateRepoUrl($valData["slug"]);
+
         $valData["startingDate"] = date("Y-m-d") . " " . date("H:i:s");
         Project::create($valData);
         return to_route("admin.projects.index")->with("message", "Project successfully inserted");
@@ -55,7 +56,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view("admin.projects.show", compact("project"));
     }
 
     /**
