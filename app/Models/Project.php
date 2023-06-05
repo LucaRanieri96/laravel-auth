@@ -11,11 +11,6 @@ class Project extends Model
     use HasFactory;
     protected $fillable = ['name', 'slug', 'repoUrl', 'startingDate'];
 
-    public static function generateSlug($projectName) {
-        $slug = Str::slug($projectName, '-');
-        return $slug;
-    }
-
     public static function generateRepoUrl($slug) {
         $repoUrl = 'https://github.com/LucaRanieri96/' . $slug;
         return $repoUrl;
