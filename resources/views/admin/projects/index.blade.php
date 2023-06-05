@@ -27,6 +27,11 @@
         <td scope="row">{{ $project->name }}</td>
         <td scope="row">{{ $project->repoUrl }}</td>
         <td scope="row">{{ $project->startingDate }}</td>
+        <td scope="row">
+          <a class="text-decoration-none btn btn-success text-dark" href="{{ route('admin.projects.show', $project->id) }}">
+            <i class="fa-regular fa-eye fa-fw"></i>
+          </a>
+        </td>
       </tr>
       @empty
       <tr>
