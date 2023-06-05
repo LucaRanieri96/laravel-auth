@@ -18,9 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    // responds to url /admin
+    // Occhio Importa il controller 🧠
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); // admin.dashboard
+    Route::resource('/projects', ProjectController::class);
+   
+}); 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
