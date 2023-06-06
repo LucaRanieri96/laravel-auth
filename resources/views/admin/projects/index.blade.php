@@ -1,50 +1,81 @@
 @extends('layouts.admin')
 
 @section('content')
-<a class="btn btn-primary mb-3" href="{{ route('admin.projects.create') }}" role="button">New Project</a>
+    <a class="btn btn-primary mb-3" href="{{ route('admin.projects.create') }}" role="button">New Project</a>
 
-@if(session("message"))
-<div class="alert alert-success" role="alert">
-  <strong>{{ session("message") }}</strong>
-</div>
-@endif
+    @if (session('message'))
+        <div class="alert alert-success" role="alert">
+            <strong>{{ session('message') }}</strong>
+        </div>
+    @endif
 
-<div class="table-responsive rounded overflow-hidden mb-3">
-  <table class="table table-primary align-middle text-center mb-0">
-    <thead>
-      <tr class="align-middle">
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Repository URL</th>
-        <th scope="col">Starting date</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @forelse($projects as $project)
-      <tr>
-        <td scope="row">{{ $project->id }}</td>
-        <td scope="row">{{ $project->name }}</td>
-        <td scope="row">{{ $project->repoUrl }}</td>
-        <td scope="row">{{ $project->startingDate }}</td>
-        <td scope="row">
-          <a class="btn btn-success" href="{{ route('admin.projects.show', $project->id) }}">
-            <i class="fa-regular fa-eye fa-fw"></i>
-          </a>
-          <a class="btn btn-info my-1" href="{{ route('admin.projects.edit', $project->id) }}">
-            <i class="fa-solid fa-pen-to-square"></i>
-          </a>
-          <a class="text-decoration-none btn btn-danger text-dark" href="#">
-            <i class="fa-regular fa-trash-can fa-fw"></i>
-          </a>
-        </td>
-      </tr>
-      @empty
-      <tr>
-        <td scope="row">No projects found</td>
-      </tr>
-      @endforelse
-    </tbody>
-  </table>
-</div>
+    <div class="table-responsive rounded overflow-hidden mb-3">
+        <table class="table table-primary align-middle text-center mb-0">
+            <thead>
+                <tr class="align-middle">
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Repository URL</th>
+                    <th scope="col">Starting date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($projects as $project)
+                    <tr>
+                        <td scope="row">{{ $project->id }}</td>
+                        <td scope="row">{{ $project->name }}</td>
+                        <td scope="row">{{ $project->repoUrl }}</td>
+                        <td scope="row">{{ $project->startingDate }}</td>
+                        <td scope="row">
+                            <a class="btn btn-success" href="{{ route('admin.projects.show', $project->id) }}">
+                                <i class="fa-regular fa-eye fa-fw"></i>
+                            </a>
+                            <a class="btn btn-info my-1" href="{{ route('admin.projects.edit', $project->id) }}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#modal-{{ $project->id }}">
+                                <i class="fa-regular fa-trash-can fa-fw"></i>
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="#modal-{{ $project->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="#modalTitle-{{ $project->name }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalTitle-{{ $project->id }}">Deleting project:
+                                                "{{ $project->name }}"</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <form action="{{ route('admin.projects.destroy', $project->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Confirm</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Button trigger modal -->
+
+
+                @empty
+                    <tr>
+                        <td scope="row">No projects found</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 @endsection

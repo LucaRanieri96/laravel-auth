@@ -81,10 +81,10 @@
     <main>
       <div class="container">
         <h2 class="fs-4 text-secondary my-4">
-          {{ __('Dashboard') }}
+          Your Profile
         </h2>
         <div class="row">
-          <div class="col-3">
+          <div class="col-2">
             <ul class="list-unstyled">
               <li class="p-3 rounded-3 mb-3 {{ Route::currentRouteName() === 'admin.dashboard' ? 'bg-primary' : '' }}">
                 <a class="text-dark fw-bold text-decoration-none" href="{{ route('admin.dashboard') }}">Dashboard</a>
@@ -95,7 +95,7 @@
             </ul>
           </div>
           <!-- /.col-3 -->
-          <div class="col-9">
+          <div class="col-10">
             @yield('content')
           </div>
           <!-- /.col-9 -->
