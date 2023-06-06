@@ -34,6 +34,9 @@
           <a class="btn btn-info my-1" href="{{ route('admin.projects.edit', $project->id) }}">
             <i class="fa-solid fa-pen-to-square"></i>
           </a>
+          <a class="text-decoration-none btn btn-danger text-dark" href="#">
+            <i class="fa-regular fa-trash-can fa-fw"></i>
+          </a>
         </td>
       </tr>
       @empty
