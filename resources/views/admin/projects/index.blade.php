@@ -28,11 +28,11 @@
         <td scope="row">{{ $project->repoUrl }}</td>
         <td scope="row">{{ $project->startingDate }}</td>
         <td scope="row">
-          <a class="text-decoration-none btn btn-success text-dark" href="{{ route('admin.projects.show', $project->id) }}">
+          <a class="btn btn-success" href="{{ route('admin.projects.show', $project->id) }}">
             <i class="fa-regular fa-eye fa-fw"></i>
           </a>
-          <a class="text-decoration-none btn text-dark my-2" href="{{ route('admin.projects.edit', $project->id) }}">
-            <i class="fa-regular fa-pen fa-fw"></i>
+          <a class="btn btn-info my-1" href="{{ route('admin.projects.edit', $project->id) }}">
+            <i class="fa-solid fa-pen-to-square"></i>
           </a>
         </td>
       </tr>

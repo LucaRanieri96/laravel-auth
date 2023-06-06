@@ -79,7 +79,14 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        
+        $valData =  $request->validated();
+
+        $valData["slug"] = Project::generateSlug($valData["name"]);
+        $valData["repoUrl"] = Project::generateRepoUrl($valData["slug"]);
+
+        $valData["startingDate"] = date("Y-m-d") . " " . date("H:i:s");
+        Project::update($valData);
+        return to_route("admin.projects.show")->with("message", "Project successfully inserted");
     }
 
     /**
@@ -90,6 +97,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return to_route("admin.projects.index")->with("message", "Project deleted");
     }
 }
