@@ -28,10 +28,10 @@
                         <td scope="row">{{ $project->repoUrl }}</td>
                         <td scope="row">{{ $project->startingDate }}</td>
                         <td scope="row">
-                            <a class="btn btn-success" href="{{ route('admin.projects.show', $project->id) }}">
+                            <a class="btn btn-success" href="{{ route('admin.projects.show', $project->slug) }}">
                                 <i class="fa-regular fa-eye fa-fw"></i>
                             </a>
-                            <a class="btn btn-info my-1" href="{{ route('admin.projects.edit', $project->id) }}">
+                            <a class="btn btn-info my-1" href="{{ route('admin.projects.edit', $project->slug) }}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
 
@@ -41,13 +41,13 @@
                             </button>
                             <!-- Modal -->
                             <div class="modal fade" id="#modal-{{ $project->id }}" tabindex="-1" data-bs-backdrop="static"
-                                data-bs-keyboard="false" role="dialog" aria-labelledby="#modalTitle-{{ $project->id }}"
+                                data-bs-keyboard="false" role="dialog" aria-labelledby="#modalTitle-{{ $project->slug }}"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm"
                                 role="document" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="modalTitle-{{ $project->id }}">Deleting project:
+                                            <h5 class="modal-title" id="modalTitle-{{ $project->slug }}">Deleting project:
                                                 "{{ $project->name }}"</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>

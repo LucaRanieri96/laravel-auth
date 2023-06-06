@@ -39,6 +39,9 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+
+        //dd($request->all());
+
         $valData =  $request->validated();
 
         $valData['slug'] = Project::generateSlug($valData['name']);
@@ -46,6 +49,8 @@ class ProjectController extends Controller
         $valData['repoUrl'] = Project::generateRepoUrl($valData['slug']);
 
         $valData["startingDate"] = date("Y-m-d") . " " . date("H:i:s");
+
+        //dd($valData);
 
         Project::create($valData);
 

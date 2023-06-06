@@ -24,7 +24,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // responds to url /admin
     // Occhio Importa il controller 🧠
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); // admin.dashboard
-    Route::resource('/projects', ProjectController::class);
+    Route::resource('/projects', ProjectController::class)->parameters(['projects'=>'project:slug']);
    
 }); 
 

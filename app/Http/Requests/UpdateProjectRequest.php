@@ -24,7 +24,9 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'required',
+            'repoUrl'=>'nullable',
+            'startingDate'=>'nullable',
         ];
     }
 }
