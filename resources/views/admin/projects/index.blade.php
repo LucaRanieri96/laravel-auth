@@ -31,6 +31,9 @@
           <a class="text-decoration-none btn btn-success text-dark" href="{{ route('admin.projects.show', $project->id) }}">
             <i class="fa-regular fa-eye fa-fw"></i>
           </a>
+          <a class="text-decoration-none btn text-dark my-2" href="{{ route('admin.projects.edit', $project->id) }}">
+            <i class="fa-regular fa-pen fa-fw"></i>
+          </a>
         </td>
       </tr>
       @empty
